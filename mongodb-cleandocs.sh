@@ -18,6 +18,6 @@ db.getCollectionNames().forEach(function (c) {if(c.indexOf('o_') < 0) return; db
 
 # Clean tasks
 db.tasks.remove(({'createdAt': {'$lt': new Date().getTime() - 24 * 60 * 60 * 1000}})) || curl -X POST --header ‘Content-Type: application/json' --header 'Accept: application/vnd.pagerduty+json;version=2' --header 'From: admin@idecisiongames.com' --header 'Authorization: Token token="$PD_TOKEN"' -d '{"incident":{"type":"incident","title":"IDG tasks cleaning failed.","service":{"id":"PONW4BQ","type":"service_reference"}}}' 'https://api.pagerduty.com/incidents'
-db.o_tasks.remove(({'m.ts': {'$lt': new Date().getTime() - 24 * 60 * 60 * 1000}}))
+db.o_tasks.remove(({'m.ts': {'$lt': new Date().getTime() - 24 * 60 * 60 * 1000}})) || curl -X POST --header ‘Content-Type: application/json' --header 'Accept: application/vnd.pagerduty+json;version=2' --header 'From: admin@idecisiongames.com' --header 'Authorization: Token token="$PD_TOKEN"' -d '{"incident":{"type":"incident","title":"IDG tasks ops cleaning failed.","service":{"id":"PONW4BQ","type":"service_reference"}}}' 'https://api.pagerduty.com/incidents'
 
 exit
