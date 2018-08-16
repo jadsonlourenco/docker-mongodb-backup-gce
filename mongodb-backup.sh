@@ -18,7 +18,7 @@ EOF
 
 send_notification()
 {
-  curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/vnd.pagerduty+json;version=2' --header 'From: admin@idecisiongames.com' --header "Authorization: Token token=$PD_TOKEN" -d "$(get_post_data $1)" 'https://api.pagerduty.com/incidents'
+  curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/vnd.pagerduty+json;version=2' --header 'From: admin@idecisiongames.com' --header "Authorization: Token token=$PD_TOKEN" -d "$(get_post_data "$1")" 'https://api.pagerduty.com/incidents'
 }
 
 # Path in which to create the backup (will get cleaned later)
@@ -30,7 +30,7 @@ CURRENT_DATE=$(date +"%Y%m%d-%H%M")
 BACKUP_FILENAME="$DB_NAME-$CURRENT_DATE.tar.gz"
 
 # Create the backup
-mongodump -h "$DB_HOST" -d "$DB_NAME" -u "$DB_USER" -p "$DB_PASS" -o "$BACKUP_PATH" || send_notification IdgBackupFailed
+mongodump -h "$DB_HOST" -d "$DB_NAME" -u "$DB_USER" -p "$DB_PASS" -o "$BACKUP_PATH" || send_notification IDG Backup Failed.
 cd $BACKUP_PATH || exit
 
 # Archive and compress
