@@ -31,6 +31,9 @@ ENV CRON_TIME "0 1 * * *"
 COPY ./mongodb-backup.sh /
 RUN chmod +x /mongodb-backup.sh
 
+COPY ./mongodb-cleandocs.sh /
+RUN chmod +x mongodb-cleandocs.sh
+
 COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
